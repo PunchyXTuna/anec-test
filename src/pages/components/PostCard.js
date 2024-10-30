@@ -2,6 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function PostCard({ post }) {
+  // Check if post and post.fields are defined
+  if (!post || !post.fields) {
+    return <div>Post data is not available.</div>;
+  }
+
   const { title, slug, timeItTook, thumbnail } = post.fields;
 
   return (
@@ -16,11 +21,11 @@ export default function PostCard({ post }) {
       <div className="content">
         <div className="info">
           <h4>{title}</h4>
-          <p> Took {timeItTook} hours </p>
+          <p>Took {timeItTook} hours</p>
         </div>
         <div className="actions">
           <Link legacyBehavior href={"/posts/" + slug}>
-            <a>Check it Out !</a>
+            <a>Check it Out!</a>
           </Link>
         </div>
       </div>
