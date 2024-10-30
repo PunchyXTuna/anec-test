@@ -25,6 +25,8 @@ export async function getStaticProps() {
 
 export default function Recipes({ posts }) {
   console.log(posts);
+
+
   return (
     <div className="project-list">
       {posts.map((post) => (

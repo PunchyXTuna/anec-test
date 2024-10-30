@@ -1,9 +1,15 @@
-import { previewClient } from "contentful";
+import { createClient } from "contentful";
+
+const previewClient = createClient({
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
+  host: "preview.contentful.com",
+});
 
 const handler = async (req, res) => {
   const { secret, slug } = req.query;
 
-  if (secret !== process.env.CONTENTFUL_PREVIEW_SECRET || !slug) {
+  if (secret !== process.env.CONTENTFUL_PREVIEW_ACCESS_SECRET || !slug) {
     return res.status(401).json({ message: "Invalid token" });
   }
 

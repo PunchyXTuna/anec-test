@@ -1,10 +1,18 @@
 import { createClient } from "contentful";
 import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import Link from "next/link"; // Ensure Link is imported
 
+// Define the Contentful clients
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CONTENTFUL_ACCESS_KEY,
+});
+
+const previewClient = createClient({
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
+  host: "preview.contentful.com",
 });
 
 export const getStaticPaths = async () => {
@@ -33,20 +41,18 @@ export async function getStaticProps({ params, preview = false }) {
 
   return {
     props: { post: items[0], preview },
-
   };
 }
 
 export default function RecipeDetails({ post, preview }) {
   const { featuredImage, title, timeItTook, tools, method } = post.fields;
 
-  console.log(post);
   return (
     <div>
       {preview && (
         <>
           You are previewing content:
-          <Link href="src\pages\api\exit-preview">Exit preview</Link>
+          <Link href="/api/exit-preview">Exit preview</Link>
         </>
       )}
       <div className="banner">
@@ -58,9 +64,8 @@ export default function RecipeDetails({ post, preview }) {
         <h2>{title}</h2>
       </div>
       <div className="info">
-        <p>Take about {timeItTook} hours </p>
+        <p>Take about {timeItTook} hours</p>
         <h3>Ingredients</h3>
-
         {tools.map((tll) => (
           <span key={tll}>{tll}</span>
         ))}
@@ -99,7 +104,7 @@ export default function RecipeDetails({ post, preview }) {
           color: white;
         }
         .info span::after {
-          content: ",     ";
+          content: ", ";
         }
         .info {
           color: white;
