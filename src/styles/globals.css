@@ -5,6 +5,7 @@ body {
   margin: 0;
   font-family: "Roboto";
   font-size: 1.5em;
+  color: white;
 }
 .layout {
   min-height: 100vh;

@@ -34,7 +34,7 @@ export default function PostCard({ post }) {
           transform: rotateZ(-1deg);
         }
         .content {
-          background: #fff;
+          background: black;
           box-shadow: 1px 3px 5px #f3e640;
           margin: 0;
           position: relative;
@@ -50,7 +50,7 @@ export default function PostCard({ post }) {
         }
         .info p {
           margin: 0;
-          color: #777;
+          color: white;
         }
         .actions {
           margin-top: 20px;

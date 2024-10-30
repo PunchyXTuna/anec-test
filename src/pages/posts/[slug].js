@@ -24,6 +24,10 @@ export const getStaticPaths = async () => {
   };
 };
 
+
+
+
+
 export async function getStaticProps({ params }) {
   const { items } = await client.getEntries({
     content_type: "post",
@@ -66,9 +70,14 @@ export default function RecipeDetails({ post }) {
         h2,
         h3 {
           text-transform: uppercase;
+          color: white;
+        }
+        body{
+          color: white;
         }
         .banner h2 {
           margin: 0;
+          color: black;
           background: #fff;
           display: inline-block;
           padding: 20px;
@@ -80,9 +89,16 @@ export default function RecipeDetails({ post }) {
         }
         .info p {
           margin: 0;
+          color: white;
+        }
+        p{
+          color: white;
         }
         .info span::after {
           content: ",     ";
+        }
+        .info{
+          color: white;
         }
         .info span:last-child::after {
           content: ".";
