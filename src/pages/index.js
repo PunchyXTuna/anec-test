@@ -8,12 +8,6 @@ export async function getStaticProps() {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const previewClient = createClient({
-    host: "preview.contentful.com",
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
-  });
-
   const res = await client.getEntries({ content_type: "post" });
 
   return {
