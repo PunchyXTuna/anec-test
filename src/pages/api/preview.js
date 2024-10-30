@@ -3,9 +3,7 @@ import { previewClient } from "contentful";
 const handler = async (req, res) => {
   const { secret, slug } = req.query;
 
-  if (secret !== process.env.CONTENTFUL_PREVIEW_SECRET || !slug) {
-    return res.status(401).json({ message: "Invalid token" });
-  }
+
 
   const response = await previewClient.getEntries({
     content_type: "post",
