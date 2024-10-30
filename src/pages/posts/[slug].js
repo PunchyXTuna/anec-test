@@ -24,27 +24,31 @@ export const getStaticPaths = async () => {
   };
 };
 
-
-
-
-
-export async function getStaticProps({ params }) {
-  const { items } = await client.getEntries({
+export async function getStaticProps({ params, preview = false }) {
+  const currentClient = preview ? previewClient : client;
+  const { items } = await currentClient.getEntries({
     content_type: "post",
     "fields.slug": params.slug,
   });
 
   return {
-    props: { post: items[0] },
+    props: { post: items[0], preview },
+
   };
 }
 
-export default function RecipeDetails({ post }) {
+export default function RecipeDetails({ post, preview }) {
   const { featuredImage, title, timeItTook, tools, method } = post.fields;
 
   console.log(post);
   return (
     <div>
+      {preview && (
+        <>
+          You are previewing content:
+          <Link href="src\pages\api\exit-preview">Exit preview</Link>
+        </>
+      )}
       <div className="banner">
         <Image
           src={"https:" + featuredImage.fields.file.url}
@@ -72,7 +76,7 @@ export default function RecipeDetails({ post }) {
           text-transform: uppercase;
           color: white;
         }
-        body{
+        body {
           color: white;
         }
         .banner h2 {
@@ -91,13 +95,13 @@ export default function RecipeDetails({ post }) {
           margin: 0;
           color: white;
         }
-        p{
+        p {
           color: white;
         }
         .info span::after {
           content: ",     ";
         }
-        .info{
+        .info {
           color: white;
         }
         .info span:last-child::after {
